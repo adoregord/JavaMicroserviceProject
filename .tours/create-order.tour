@@ -1,0 +1,131 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "create-order",
+  "steps": [
+    {
+      "file": "order/order/src/main/java/com/project/order/orders/OrdersController.java",
+      "description": "go to /orders/create end point to create an order",
+      "line": 41
+    },
+    {
+      "file": "order/order/src/main/java/com/project/order/orders/OrdersService.java",
+      "description": "The logic to save our order list using OrdersDTO and then return Mono(OrdersDTOSend)",
+      "line": 49
+    },
+    {
+      "file": "order/order/src/main/java/com/project/order/orders/OrdersService.java",
+      "description": "save order using repository",
+      "line": 58
+    },
+    {
+      "file": "order/order/src/main/java/com/project/order/orders/OrdersService.java",
+      "description": "save orderItems with repository",
+      "line": 67
+    },
+    {
+      "file": "order/order/src/main/java/com/project/order/orders/OrdersService.java",
+      "description": "sending message with OrdersDTOSend to Orchestrator with Apache Kafka Messaging",
+      "line": 74
+    },
+    {
+      "file": "order/order/src/main/java/com/project/order/kafka/OrderProducer.java",
+      "description": "This is where the logic and I'm using order-topic2",
+      "line": 20
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/kafka/OrchestratorConsumer.java",
+      "description": "Next the orchestrator listen to the topic \"order-topic2\"",
+      "line": 22
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/kafka/OrchestratorConsumer.java",
+      "description": "Next Orchestrator will send the message to Product Service using Webclient",
+      "line": 25
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/OrchestratorService.java",
+      "description": "this is the logic behind the webclient, here i hit the api to check and deduct the stock\r\n",
+      "line": 28
+    },
+    {
+      "file": "product/product/src/main/java/com/project/product/ProductController.java",
+      "description": "next webclient will hit this end point ",
+      "line": 77
+    },
+    {
+      "file": "product/product/src/main/java/com/project/product/ProductService.java",
+      "description": "then product service run this method and returns Mono(OrdersDTOSend) ",
+      "line": 88
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/OrchestratorService.java",
+      "description": "Webclient will give the response if the response is fail then Orchestrator will send a message to OrderService to change the status",
+      "line": 40
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/kafka/OrchestratorProducer.java",
+      "description": "this will send the message back to order with new topic",
+      "line": 24
+    },
+    {
+      "file": "order/order/src/main/java/com/project/order/kafka/OrderConsumer.java",
+      "description": "it will run this",
+      "line": 25
+    },
+    {
+      "file": "order/order/src/main/java/com/project/order/orders/OrdersService.java",
+      "description": "this is where order change the status to fail",
+      "line": 112
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/OrchestratorService.java",
+      "description": "If processing then it will run the method to send message with webclient to payment",
+      "line": 43
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/OrchestratorService.java",
+      "description": "sending to payment",
+      "line": 52
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/OrchestratorService.java",
+      "description": "If failed then orchestrator will:\r\n1. send back to order\r\n2. send back to product to re add the stock\r\n3. send to payment to add payment fail",
+      "line": 64
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/OrchestratorService.java",
+      "description": "this will run and send message to re add stock",
+      "line": 82
+    },
+    {
+      "file": "product/product/src/main/java/com/project/product/ProductController.java",
+      "description": "it will go here\r\n",
+      "line": 85
+    },
+    {
+      "file": "product/product/src/main/java/com/project/product/ProductService.java",
+      "description": "and run this method",
+      "line": 128
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/OrchestratorService.java",
+      "description": "if success then orchestrator:\r\n1. send back to order to change the status to COMPLETED\r\n2. send to payment to make transaction details",
+      "line": 71
+    },
+    {
+      "file": "order/order/src/main/java/com/project/order/kafka/OrderConsumer.java",
+      "description": "it will go here and update the status\r\n",
+      "line": 19
+    },
+    {
+      "file": "order/order/src/main/java/com/project/order/orders/OrdersService.java",
+      "description": "it will go here",
+      "line": 82
+    },
+    {
+      "file": "orchestrator/orchestrator/src/main/java/com/example/orchestrator/kafka/OrchestratorProducer.java",
+      "description": "this method send kafka message with topic to order",
+      "line": 20
+    }
+  ]
+}

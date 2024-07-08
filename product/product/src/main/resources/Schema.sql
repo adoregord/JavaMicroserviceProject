@@ -1,0 +1,13 @@
+-- DROP TABLE IF EXISTS product;
+
+CREATE TABLE IF NOT EXISTS product
+(
+    id BIGSERIAL PRIMARY KEY, 
+    price DOUBLE PRECISION NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP,
+    description VARCHAR(255) NOT NULL, 
+    image_url VARCHAR(255) NOT NULL, 
+    stock_quantity INT NOT NULL,
+    published_at TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP
+);

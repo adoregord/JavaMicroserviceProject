@@ -1,0 +1,20 @@
+DROP TABLE IF EXISTS transaction_details;
+-- DROP TABLE IF EXISTS balance;
+
+CREATE TABLE IF NOT EXISTS transaction_details
+(
+    id BIGSERIAL PRIMARY KEY, 
+    amount DOUBLE PRECISION NOT NULL,
+    order_id DOUBLE PRECISION NOT NULL,
+    payment_date TIMESTAMP(6), --DEFAULT CURRENT_TIMESTAMP,
+    mode VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    reference_number VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS balance
+(
+    id BIGSERIAL PRIMARY KEY,
+    amount DOUBLE PRECISION NOT NULL,
+    customer_id BIGINT
+);
